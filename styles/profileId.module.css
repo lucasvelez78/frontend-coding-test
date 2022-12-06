@@ -1,0 +1,7 @@
+.taskTitle {
+  margin-left: 20px;
+}
+
+.taskContainer {
+  display: flex;
+}

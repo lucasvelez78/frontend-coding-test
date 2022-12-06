@@ -1,0 +1,33 @@
+.container {
+  text-align: center;
+  align-items: center;
+  color: #ff1818;
+  padding-top: 30px;
+}
+
+.list {
+  width: 500px;
+  margin: auto;
+}
+
+.sort {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  margin: 20px auto;
+}
+
+.sort button {
+  margin-top: 10px;
+  margin-left: 10px;
+  height: 40px;
+  width: 110px;
+  cursor: pointer;
+  border-style: none;
+  color: #ececec;
+  background-color: #ffc300;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  font-size: 18px;
+  font-weight: bold;
+}
