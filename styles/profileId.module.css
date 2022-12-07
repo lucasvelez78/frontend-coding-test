@@ -1,7 +1,22 @@
 .taskTitle {
-  margin-left: 20px;
+  width: 560px;
+  margin: 30px auto 20px;
+  padding-left: 35px;
+  background-color: #ffc300;
+  font-size: 24px;
 }
 
 .taskContainer {
+  align-items: center;
+  width: 560px;
   display: flex;
+  margin: 10px auto;
+  background-color: #ffc300;
+}
+
+.lowerContainer {
+  padding: 10px;
+  width: 600px;
+  margin: 10px auto;
+  background-color: #ffc300;
 }

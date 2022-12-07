@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "../styles/ItemDetail.module.css";
 
 function ItemDetail(props) {
@@ -8,12 +9,14 @@ function ItemDetail(props) {
       </div>
       <div className={styles.profile}>
         <h3>{props.fullName}</h3>
+        <p>{props.occupation}</p>
         <p>Age: {props.age}</p>
-        <p>Occupation: {props.occupation}</p>
         <p>Nickname: {props.nickname}</p>
-        <p>Gender: {props.gender}</p>
+        <p>{props.gender}</p>
       </div>
-      <button className={styles.editBtn}>Edit Profile</button>
+      <li className={styles.editBtn}>
+        <Link href={`/profile/${props.id}/edit`}>Edit Profile</Link>
+      </li>
     </div>
   );
 }

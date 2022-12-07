@@ -36,6 +36,7 @@ function HomePage({ users }) {
         {users.map((user) => (
           <ItemList
             key={user.id}
+            id={user.id}
             picture={user.picture}
             fullName={user.fullName}
             age={user.age}

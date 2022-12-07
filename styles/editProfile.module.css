@@ -1,0 +1,23 @@
+.profileFormContainer {
+  align-items: center;
+  width: 400px;
+  margin: 50px auto;
+}
+
+.profileForm {
+  align-items: center;
+  width: 350px;
+  margin: auto;
+}
+
+.formGroup {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formInput {
+  margin-top: 10px;
+  display: block;
+  width: 300px;
+}
