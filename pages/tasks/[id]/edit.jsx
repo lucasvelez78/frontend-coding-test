@@ -15,45 +15,56 @@ export async function getStaticPaths() {
       { params: { id: "8" } },
       { params: { id: "9" } },
       { params: { id: "10" } },
+      { params: { id: "11" } },
+      { params: { id: "12" } },
+      { params: { id: "13" } },
+      { params: { id: "14" } },
+      { params: { id: "15" } },
+      { params: { id: "16" } },
+      { params: { id: "17" } },
+      { params: { id: "18" } },
+      { params: { id: "19" } },
+      { params: { id: "20" } },
     ],
     fallback: false,
   };
 }
 
 export const getStaticProps = async () => {
-  const response = await fetch("http://localhost:3001/people");
-  const userData = await response.json();
+  const response = await fetch("http://localhost:3001/tasks");
+  const tasksData = await response.json();
 
   return {
-    props: { user: userData },
+    props: { tasks: tasksData },
   };
 };
 
-function EditProfile({ user }) {
+function EditTask({ tasks }) {
   const router = useRouter();
-  const currentUser = user.filter((item) => item.id == router.query.id);
-  const [activeUser, setActiveUser] = useState({
-    fullName: currentUser[0].fullName,
-    occupation: currentUser[0].occupation,
-    age: currentUser[0].age,
-    nickname: currentUser[0].nickname,
-    gender: currentUser[0].gender,
-    picture: currentUser[0].picture,
+  const currentTask = tasks.filter((task) => task.id == router.query.id);
+  const [activeTask, setActiveTask] = useState({
+    id: currentTask[0].id,
+    title: currentTask[0].title,
+    description: currentTask[0].description,
+    completed: currentTask[0].completed,
+    startDate: currentTask[0].startDate,
+    endDate: currentTask[0].endDate,
+    personId: currentTask[0].personId,
   });
 
   function handleChange(evt) {
     const input = evt.target;
-    const copyActiveUser = { ...activeUser };
-    copyActiveUser[input.name] = input.value;
-    setActiveUser(copyActiveUser);
+    const copyActiveTask = { ...activeTask };
+    copyActiveTask[input.name] = input.value;
+    setActiveTask(copyActiveTask);
   }
 
   function onSubmit(e) {
     e.preventDefault();
-    fetch("http://localhost:3001/people/" + router.query.id, {
+    fetch("http://localhost:3001/tasks/" + router.query.id, {
       method: "PUT",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(activeUser),
+      body: JSON.stringify(activeTask),
     })
       .then((res) => {
         alert("saved succesfully");
@@ -63,82 +74,81 @@ function EditProfile({ user }) {
 
   return (
     <div className={styles.profileFormContainer}>
-      <h1>Edit Profile</h1>
+      <h1>Edit Task</h1>
       <form className={styles.profileForm} onSubmit={onSubmit}>
         <div className={styles.formGroup}>
-          <label htmlFor="name">
-            Name
+          <label htmlFor="title">
+            Title
             <input
               required
-              defaultValue={currentUser[0].fullName}
+              defaultValue={currentTask[0].title}
               className={styles.formInput}
               type="text"
-              name="name"
+              name="title"
               onChange={handleChange}
             ></input>
           </label>
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="occupation">
-            Occupation
+          <label htmlFor="description">
+            Description
             <input
               required
-              defaultValue={currentUser[0].occupation}
+              defaultValue={currentTask[0].description}
               className={styles.formInput}
               type="text"
-              name="occupation"
+              name="description"
               onChange={handleChange}
             ></input>
           </label>
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="age">
-            Age
+          <label htmlFor="completed">
+            Completed
             <input
               required
-              defaultValue={currentUser[0].age}
+              defaultChecked={currentTask[0].completed}
+              className={styles.formInput}
+              type="checkbox"
+              name="completed"
+              onChange={handleChange}
+            ></input>
+          </label>
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="startDate">
+            Start Date
+            <input
+              required
+              defaultValue={currentTask[0].startDate}
+              className={styles.formInput}
+              type="text"
+              name="startDate"
+              onChange={handleChange}
+            ></input>
+          </label>
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="endDate">
+            End Date - optional -
+            <input
+              defaultValue={currentTask[0].endDate}
+              className={styles.formInput}
+              type="text"
+              name="endDate"
+              onChange={handleChange}
+            ></input>
+          </label>
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="personId">
+            personId
+            <input
+              required
+              defaultValue={currentTask[0].personId}
               className={styles.formInput}
               type="number"
-              name="age"
-              onChange={handleChange}
-            ></input>
-          </label>
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="Nickname">
-            Nickname
-            <input
-              required
-              defaultValue={currentUser[0].nickname}
-              className={styles.formInput}
-              type="text"
-              name="Nickname"
-              onChange={handleChange}
-            ></input>
-          </label>
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="gender">
-            Gender
-            <input
-              required
-              defaultValue={currentUser[0].gender}
-              className={styles.formInput}
-              type="text"
-              name="gender"
-              onChange={handleChange}
-            ></input>
-          </label>
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="picture">
-            Picture - write the URL -
-            <input
-              required
-              defaultValue={currentUser[0].picture}
-              className={styles.formInput}
-              type="text"
-              name="picture"
+              name="personId"
               onChange={handleChange}
             ></input>
           </label>
@@ -151,4 +161,4 @@ function EditProfile({ user }) {
   );
 }
 
-export default EditProfile;
+export default EditTask;

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "../styles/ItemTasks.module.css";
 
 function ItemTasks(props) {
@@ -6,7 +7,9 @@ function ItemTasks(props) {
       <div>
         <div className={styles.titleBox}>
           <p className={styles.titleTask}>{props.title}</p>
-          <button onClick={() => props.onChange(props.id)}>Edit Task</button>
+          <li className={styles.editTask}>
+            <Link href={`/tasks/${props.id}/edit`}>Edit Task</Link>
+          </li>
         </div>
 
         <p>{props.description}</p>

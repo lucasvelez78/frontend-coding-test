@@ -50,16 +50,16 @@ function ProfileUser({ users, tasks }) {
       completed: !changedTask[0].completed,
       startDate: changedTask[0].startDate,
       endDate: changedTask[0].endDate,
-      personId: changedTask[0].personID,
+      personId: changedTask[0].personId,
     };
-    console.log(taskStatus);
+
     fetch("http://localhost:3001/tasks/" + id, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(body),
     })
       .then((res) => {
-        alert("Changed succesfully");
+        window.location.reload();
       })
       .catch((err) => console.log(err.message));
   }
