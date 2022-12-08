@@ -59,6 +59,13 @@ function EditTask({ tasks }) {
     setActiveTask(copyActiveTask);
   }
 
+  function handleCheckBox(evt) {
+    const input = evt.target;
+    const copyActiveTask = { ...activeTask };
+    copyActiveTask[input.name] = input.checked;
+    setActiveTask(copyActiveTask);
+  }
+
   function onSubmit(e) {
     e.preventDefault();
     fetch("http://localhost:3001/tasks/" + router.query.id, {
@@ -106,12 +113,11 @@ function EditTask({ tasks }) {
           <label htmlFor="completed">
             Completed
             <input
-              required
               defaultChecked={currentTask[0].completed}
               className={styles.formInput}
               type="checkbox"
               name="completed"
-              onChange={handleChange}
+              onChange={handleCheckBox}
             ></input>
           </label>
         </div>
