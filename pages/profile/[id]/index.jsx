@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
 import ItemDetail from "../../../components/ItemDetail";
 import ItemTasks from "../../../components/ItemTasks";
 import styles from "../../../styles/profileId.module.css";
@@ -41,6 +42,91 @@ function ProfileUser({ users, tasks }) {
     (task) => task.personId === Number(router.query.id)
   );
 
+  const d = new Date();
+  const currentDay = d.getDate();
+  const currentMonth = d.getMonth() + 1;
+  const currentYear = d.getFullYear();
+
+  for (let i = 0; i < userTasks.length; i++) {
+    if (
+      userTasks[i].completed === false &&
+      userTasks[i].endDate &&
+      currentYear > Number(userTasks[i].endDate.slice(0, 4))
+    ) {
+      const body = {
+        id: userTasks[i].id,
+        title: userTasks[i].title,
+        description: userTasks[i].description,
+        completed: true,
+        startDate: userTasks[i].startDate,
+        endDate: userTasks[i].endDate,
+        personId: userTasks[i].personId,
+      };
+      fetch("http://localhost:3001/tasks/" + userTasks[i].id, {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(body),
+      })
+        .then((res) => {
+          window.location.reload();
+          console.log("Task Modified");
+        })
+        .catch((err) => console.log(err.message));
+    } else {
+      if (
+        userTasks[i].completed === false &&
+        userTasks[i].endDate &&
+        currentMonth > Number(userTasks[i].endDate.slice(5, 7))
+      ) {
+        const body = {
+          id: userTasks[i].id,
+          title: userTasks[i].title,
+          description: userTasks[i].description,
+          completed: true,
+          startDate: userTasks[i].startDate,
+          endDate: userTasks[i].endDate,
+          personId: userTasks[i].personId,
+        };
+        fetch("http://localhost:3001/tasks/" + userTasks[i].id, {
+          method: "PUT",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(body),
+        })
+          .then((res) => {
+            window.location.reload();
+            console.log("Task Modified");
+          })
+          .catch((err) => console.log(err.message));
+      } else {
+        if (
+          userTasks[i].completed === false &&
+          userTasks[i].endDate &&
+          currentDay > Number(userTasks[i].endDate.slice(8, 10))
+        ) {
+          const body = {
+            id: userTasks[i].id,
+            title: userTasks[i].title,
+            description: userTasks[i].description,
+            completed: true,
+            startDate: userTasks[i].startDate,
+            endDate: userTasks[i].endDate,
+            personId: userTasks[i].personId,
+          };
+          fetch("http://localhost:3001/tasks/" + userTasks[i].id, {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(body),
+          })
+            .then((res) => {
+              window.location.reload();
+              console.log("Task Modified");
+            })
+            .catch((err) => console.log(err.message));
+        }
+      }
+    }
+  }
+
   function handleChange(id) {
     const changedTask = userTasks.filter((task) => task.id === id);
     const body = {
@@ -59,6 +145,9 @@ function ProfileUser({ users, tasks }) {
       body: JSON.stringify(body),
     })
       .then((res) => {
+        alert(
+          "WARNING: If you are marking the status as not completed, but the endDate of this task is overdue, the status will be automatically mark as completed again."
+        );
         window.location.reload();
       })
       .catch((err) => console.log(err.message));
