@@ -6,17 +6,19 @@ function ItemTasks(props) {
     <div className={styles.taskBox}>
       <div>
         <div className={styles.titleBox}>
-          <p className={styles.titleTask}>{props.title}</p>
+          <h3 className={styles.titleTask}>{props.title}</h3>
           <li className={styles.editTask}>
             <Link href={`/tasks/${props.id}/edit`}>Edit Task</Link>
           </li>
         </div>
 
         <p>{props.description}</p>
-        <p>Status: {props.status}</p>
-        <button onClick={() => props.onChange(props.id)}>
-          {props.btnState}
-        </button>
+        <div className={styles.statusBox}>
+          <p>Status: {props.status}</p>
+          <button onClick={() => props.onChange(props.id)}>
+            {props.btnState}
+          </button>
+        </div>
       </div>
     </div>
   );

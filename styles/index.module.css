@@ -1,13 +1,24 @@
 .container {
   text-align: center;
   align-items: center;
-  color: #ff1818;
+  color: black;
   padding-top: 30px;
+  background-color: #ffc300;
+  padding-bottom: 50px;
+}
+
+.homeTitle h1 {
+  font-size: 50px;
 }
 
 .list {
-  width: 500px;
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 0;
+  padding: 5px;
+  align-items: center;
   margin: auto;
+  width: 1200px;
 }
 
 .sort {
@@ -25,9 +36,13 @@
   cursor: pointer;
   border-style: none;
   color: #ececec;
-  background-color: #ffc300;
+  background-color: #ff1818;
   border-radius: 5px;
   letter-spacing: 1px;
   font-size: 18px;
   font-weight: bold;
+}
+
+.sort button:hover {
+  background-color: black;
 }

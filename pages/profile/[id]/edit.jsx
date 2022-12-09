@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../../../styles/editProfile.module.css";
 
@@ -143,9 +144,14 @@ function EditProfile({ user }) {
             ></input>
           </label>
         </div>
-        <button className={styles.btnForm} type="submit">
-          Submit
-        </button>
+        <div className={styles.btnsForm}>
+          <button type="submit">Submit</button>
+          <div className={styles.cancelBtnContainer}>
+            <li className={styles.cancelBtn}>
+              <Link href={`/profile/${currentUser[0].id}`}>Cancel</Link>
+            </li>
+          </div>
+        </div>
       </form>
     </div>
   );

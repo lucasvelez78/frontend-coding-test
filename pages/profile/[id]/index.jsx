@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import Link from "next/link";
 import ItemDetail from "../../../components/ItemDetail";
 import ItemTasks from "../../../components/ItemTasks";
 import styles from "../../../styles/profileId.module.css";
@@ -154,8 +154,13 @@ function ProfileUser({ users, tasks }) {
   }
 
   return (
-    <div>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.goBackBtnContainer}>
+        <li className={styles.goBackBtn}>
+          <Link href="/">Go Back</Link>
+        </li>
+      </div>
+      <div className={styles.upperContainer}>
         <ItemDetail
           id={userInfo[0].id}
           image={userInfo[0].picture}

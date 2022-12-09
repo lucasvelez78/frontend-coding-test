@@ -27,7 +27,10 @@ function HomePage({ users }) {
 
   return (
     <div className={styles.container}>
-      <h1>The Lego Crew</h1>
+      <div className={styles.homeTitle}>
+        <h1>The Lego Crew</h1>
+      </div>
+
       <div className={styles.sort}>
         <h3>Sort by age: </h3>
         <button onClick={() => sortList()}>Sort List</button>

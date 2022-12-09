@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import styles from "../../../styles/editProfile.module.css";
+import Link from "next/link";
+import styles from "../../../styles/editTask.module.css";
 
 export async function getStaticPaths() {
   return {
@@ -80,9 +81,9 @@ function EditTask({ tasks }) {
   }
 
   return (
-    <div className={styles.profileFormContainer}>
+    <div className={styles.taskFormContainer}>
       <h1>Edit Task</h1>
-      <form className={styles.profileForm} onSubmit={onSubmit}>
+      <form className={styles.taskForm} onSubmit={onSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="title">
             Title
@@ -114,16 +115,17 @@ function EditTask({ tasks }) {
             Completed
             <input
               defaultChecked={currentTask[0].completed}
-              className={styles.formInput}
+              className={styles.formInputCheckBox}
               type="checkbox"
               name="completed"
               onChange={handleCheckBox}
             ></input>
+            <span className={styles.customCheckBox}></span>
           </label>
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="startDate">
-            Start Date
+            Start Date - YYYY-MM-DD
             <input
               required
               defaultValue={currentTask[0].startDate}
@@ -136,7 +138,7 @@ function EditTask({ tasks }) {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="endDate">
-            End Date - optional -
+            End Date - optional - YYYY-MM-DD
             <input
               defaultValue={currentTask[0].endDate}
               className={styles.formInput}
@@ -148,7 +150,7 @@ function EditTask({ tasks }) {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="personId">
-            personId
+            personId - Which crew member will perform the task.
             <input
               required
               defaultValue={currentTask[0].personId}
@@ -159,9 +161,14 @@ function EditTask({ tasks }) {
             ></input>
           </label>
         </div>
-        <button className={styles.btnForm} type="submit">
-          Submit
-        </button>
+        <div className={styles.btnsForm}>
+          <button type="submit">Submit</button>
+          <div className={styles.cancelBtnContainer}>
+            <li className={styles.cancelBtn}>
+              <Link href={`/profile/${currentTask[0].personId}`}>Cancel</Link>
+            </li>
+          </div>
+        </div>
       </form>
     </div>
   );

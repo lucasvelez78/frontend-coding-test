@@ -1,6 +1,9 @@
 .taskBox {
   align-items: center;
   margin: auto 20px;
+  margin-bottom: 10px;
+  background-color: #ececec;
+  width: 380px;
 }
 
 .titleBox {
@@ -10,4 +13,42 @@
 .titleTask {
   display: inline;
   margin-right: 20px;
+}
+
+.editTask {
+  list-style: none;
+  margin: 20px auto auto 10px;
+}
+
+.editTask a {
+  height: 40px;
+  font-size: 16px;
+  color: #ececec;
+  text-decoration: none;
+  background-color: #ff1818;
+  padding: 5px 8px;
+  border-radius: 5px;
+}
+
+.editTask a:hover {
+  background-color: black;
+  padding: 5px 8px;
+}
+
+.statusBox {
+  border-top-style: solid;
+  border-width: 1px;
+}
+
+.statusBox button {
+  padding: 10px;
+  background-color: #5463ff;
+  color: #ececec;
+  border-style: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.statusBox button:hover {
+  background-color: black;
 }

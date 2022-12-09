@@ -186,7 +186,7 @@
       "id": 12,
       "title": "Task 12",
       "description": "This is the twelfth task on the list.",
-      "completed": false,
+      "completed": true,
       "startDate": "2022-12-04",
       "endDate": "2022-12-05",
       "personId": 2
