@@ -90,6 +90,15 @@
       "nickname": "Ash",
       "gender": "Female",
       "picture": "https://randomuser.me/api/portraits/lego/1.jpg"
+    },
+    {
+      "fullName": "Mario Moreno",
+      "age": "111",
+      "occupation": "Comedian",
+      "nickname": "Cantinflas",
+      "gender": "male",
+      "picture": "https://randomuser.me/api/portraits/lego/6.jpg",
+      "id": 11
     }
   ],
   "tasks": [

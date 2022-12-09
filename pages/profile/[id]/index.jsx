@@ -157,7 +157,7 @@ function ProfileUser({ users, tasks }) {
     <div className={styles.container}>
       <div className={styles.goBackBtnContainer}>
         <li className={styles.goBackBtn}>
-          <Link href="/">Go Back</Link>
+          <Link href="/">Home</Link>
         </li>
       </div>
       <div className={styles.upperContainer}>

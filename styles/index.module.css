@@ -23,8 +23,8 @@
 
 .sort {
   display: flex;
-  justify-content: center;
-  width: 400px;
+  justify-content: space-around;
+  width: 1100px;
   margin: 20px auto;
 }
 
@@ -45,4 +45,58 @@
 
 .sort button:hover {
   background-color: black;
+}
+
+.addBtn {
+  list-style: none;
+  border-radius: 5px;
+  margin: 17px auto;
+  width: 200px;
+}
+
+.addBtn a {
+  width: 200px;
+  height: 40px;
+  color: #ececec;
+  text-decoration: none;
+  background-color: #5463ff;
+  padding: 7.5px 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.addTaskBtn {
+  list-style: none;
+  border-radius: 5px;
+  margin: 17px auto;
+  width: 200px;
+}
+
+.addTaskBtn a {
+  width: 200px;
+  height: 40px;
+  color: #ececec;
+  text-decoration: none;
+  background-color: black;
+  padding: 7.5px 40px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.addTaskBtn a:hover {
+  background-color: #ffc300;
+  color: black;
+  border-style: solid;
+}
+
+.addBtn a:hover {
+  background-color: #ffc300;
+  color: black;
+  border-style: solid;
 }

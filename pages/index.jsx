@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import ItemList from "../components/ItemList";
 import styles from "../styles/index.module.css";
 
@@ -30,10 +31,15 @@ function HomePage({ users }) {
       <div className={styles.homeTitle}>
         <h1>The Lego Crew</h1>
       </div>
-
       <div className={styles.sort}>
+        <li className={styles.addBtn}>
+          <Link href="/profile/new">Add Member</Link>
+        </li>
         <h3>Sort by age: </h3>
         <button onClick={() => sortList()}>Sort List</button>
+        <li className={styles.addTaskBtn}>
+          <Link href="/tasks/new">Add Task</Link>
+        </li>
       </div>
       <div className={styles.list}>
         {users.map((user) => (
