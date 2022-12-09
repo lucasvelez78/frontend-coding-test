@@ -42,6 +42,8 @@ function ProfileUser({ users, tasks }) {
     (task) => task.personId === Number(router.query.id)
   );
 
+  // -----------------------        status handler due to endDate - START -----------------------
+
   const d = new Date();
   const currentDay = d.getDate();
   const currentMonth = d.getMonth() + 1;
@@ -76,6 +78,7 @@ function ProfileUser({ users, tasks }) {
       if (
         userTasks[i].completed === false &&
         userTasks[i].endDate &&
+        currentYear === Number(userTasks[i].endDate.slice(0, 4)) &&
         currentMonth > Number(userTasks[i].endDate.slice(5, 7))
       ) {
         const body = {
@@ -101,6 +104,8 @@ function ProfileUser({ users, tasks }) {
         if (
           userTasks[i].completed === false &&
           userTasks[i].endDate &&
+          currentYear === Number(userTasks[i].endDate.slice(0, 4)) &&
+          currentMonth === Number(userTasks[i].endDate.slice(5, 7)) &&
           currentDay > Number(userTasks[i].endDate.slice(8, 10))
         ) {
           const body = {
@@ -126,6 +131,8 @@ function ProfileUser({ users, tasks }) {
       }
     }
   }
+
+  // -----------------------        status handler due to endDate - END -----------------------
 
   function handleChange(id) {
     const changedTask = userTasks.filter((task) => task.id === id);
