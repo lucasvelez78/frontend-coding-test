@@ -1,25 +1,23 @@
 import ProfileForm from "../../../components/ProfileForm";
 
 export async function getStaticPaths() {
+  const response = await fetch("http://localhost:3001/people");
+  const data = await response.json();
+
+  const paths = data.map((crewMember) => ({
+    params: {
+      id: crewMember.id.toString(),
+    },
+  }));
+
   return {
-    paths: [
-      { params: { id: "1" } },
-      { params: { id: "2" } },
-      { params: { id: "3" } },
-      { params: { id: "4" } },
-      { params: { id: "5" } },
-      { params: { id: "6" } },
-      { params: { id: "7" } },
-      { params: { id: "8" } },
-      { params: { id: "9" } },
-      { params: { id: "10" } },
-    ],
+    paths: paths,
     fallback: false,
   };
 }
 
-export const getStaticProps = async () => {
-  const response = await fetch("http://localhost:3001/people");
+export const getStaticProps = async ({ params }) => {
+  const response = await fetch(`http://localhost:3001/people/${params.id}`);
   const userData = await response.json();
 
   return {

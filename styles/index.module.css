@@ -44,7 +44,10 @@
 }
 
 .sort button:hover {
-  background-color: black;
+  background-color: #ffc300;
+  color: black;
+  border-style: solid;
+  border-color: black;
 }
 
 .addBtn {

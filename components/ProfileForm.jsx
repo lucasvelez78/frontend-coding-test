@@ -5,14 +5,13 @@ import styles from "../styles/editProfile.module.css";
 
 function ProfileForm({ user }) {
   const router = useRouter();
-  const currentUser = user.filter((item) => item.id == router.query.id);
   const [activeUser, setActiveUser] = useState({
-    fullName: currentUser[0].fullName,
-    occupation: currentUser[0].occupation,
-    age: currentUser[0].age,
-    nickname: currentUser[0].nickname,
-    gender: currentUser[0].gender,
-    picture: currentUser[0].picture,
+    fullName: user.fullName,
+    occupation: user.occupation,
+    age: user.age,
+    nickname: user.nickname,
+    gender: user.gender,
+    picture: user.picture,
   });
 
   function handleChange(evt) {
@@ -40,14 +39,14 @@ function ProfileForm({ user }) {
       <h1>Edit Profile</h1>
       <form className={styles.profileForm} onSubmit={onSubmit}>
         <div className={styles.formGroup}>
-          <label htmlFor="name">
+          <label htmlFor="fullName">
             Name
             <input
               required
-              defaultValue={currentUser[0].fullName}
+              defaultValue={user.fullName}
               className={styles.formInput}
               type="text"
-              name="name"
+              name="fullName"
               onChange={handleChange}
             ></input>
           </label>
@@ -57,7 +56,7 @@ function ProfileForm({ user }) {
             Occupation
             <input
               required
-              defaultValue={currentUser[0].occupation}
+              defaultValue={user.occupation}
               className={styles.formInput}
               type="text"
               name="occupation"
@@ -70,7 +69,7 @@ function ProfileForm({ user }) {
             Age
             <input
               required
-              defaultValue={currentUser[0].age}
+              defaultValue={user.age}
               className={styles.formInput}
               type="number"
               name="age"
@@ -79,14 +78,14 @@ function ProfileForm({ user }) {
           </label>
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="Nickname">
+          <label htmlFor="nickname">
             Nickname
             <input
               required
-              defaultValue={currentUser[0].nickname}
+              defaultValue={user.nickname}
               className={styles.formInput}
               type="text"
-              name="Nickname"
+              name="nickname"
               onChange={handleChange}
             ></input>
           </label>
@@ -96,7 +95,7 @@ function ProfileForm({ user }) {
             Gender
             <input
               required
-              defaultValue={currentUser[0].gender}
+              defaultValue={user.gender}
               className={styles.formInput}
               type="text"
               name="gender"
@@ -109,7 +108,7 @@ function ProfileForm({ user }) {
             Picture - write the URL -
             <input
               required
-              defaultValue={currentUser[0].picture}
+              defaultValue={user.picture}
               className={styles.formInput}
               type="text"
               name="picture"
@@ -121,7 +120,7 @@ function ProfileForm({ user }) {
           <button type="submit">Submit</button>
           <div className={styles.cancelBtnContainer}>
             <li className={styles.cancelBtn}>
-              <Link href={`/profile/${currentUser[0].id}`}>Cancel</Link>
+              <Link href={`/profile/${user.id}`}>Go Back</Link>
             </li>
           </div>
         </div>

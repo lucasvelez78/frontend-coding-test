@@ -3,17 +3,16 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from "../styles/editTask.module.css";
 
-function TaskForm({ tasks }) {
+function TaskForm({ task }) {
   const router = useRouter();
-  const currentTask = tasks.filter((task) => task.id == router.query.id);
   const [activeTask, setActiveTask] = useState({
-    id: currentTask[0].id,
-    title: currentTask[0].title,
-    description: currentTask[0].description,
-    completed: currentTask[0].completed,
-    startDate: currentTask[0].startDate,
-    endDate: currentTask[0].endDate,
-    personId: currentTask[0].personId,
+    id: task.id,
+    title: task.title,
+    description: task.description,
+    completed: task.completed,
+    startDate: task.startDate,
+    endDate: task.endDate,
+    personId: task.personId,
   });
 
   function handleChange(evt) {
@@ -52,7 +51,7 @@ function TaskForm({ tasks }) {
             Title
             <input
               required
-              defaultValue={currentTask[0].title}
+              defaultValue={task.title}
               className={styles.formInput}
               type="text"
               name="title"
@@ -65,7 +64,7 @@ function TaskForm({ tasks }) {
             Description
             <input
               required
-              defaultValue={currentTask[0].description}
+              defaultValue={task.description}
               className={styles.formInput}
               type="text"
               name="description"
@@ -77,7 +76,7 @@ function TaskForm({ tasks }) {
           <label htmlFor="completed">
             Completed
             <input
-              defaultChecked={currentTask[0].completed}
+              defaultChecked={task.completed}
               className={styles.formInputCheckBox}
               type="checkbox"
               name="completed"
@@ -90,7 +89,7 @@ function TaskForm({ tasks }) {
             Start Date - YYYY-MM-DD
             <input
               required
-              defaultValue={currentTask[0].startDate}
+              defaultValue={task.startDate}
               className={styles.formInput}
               type="text"
               name="startDate"
@@ -102,7 +101,7 @@ function TaskForm({ tasks }) {
           <label htmlFor="endDate">
             End Date - optional - YYYY-MM-DD
             <input
-              defaultValue={currentTask[0].endDate}
+              defaultValue={task.endDate}
               className={styles.formInput}
               type="text"
               name="endDate"
@@ -115,7 +114,7 @@ function TaskForm({ tasks }) {
             personId - Which crew member will perform the task.
             <input
               required
-              defaultValue={currentTask[0].personId}
+              defaultValue={task.personId}
               className={styles.formInput}
               type="number"
               name="personId"
@@ -127,7 +126,7 @@ function TaskForm({ tasks }) {
           <button type="submit">Submit</button>
           <div className={styles.cancelBtnContainer}>
             <li className={styles.cancelBtn}>
-              <Link href={`/profile/${currentTask[0].personId}`}>Cancel</Link>
+              <Link href={`/profile/${task.personId}`}>Go Back</Link>
             </li>
           </div>
         </div>

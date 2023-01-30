@@ -5,39 +5,36 @@ import ItemTasks from "../../../components/ItemTasks";
 import styles from "../../../styles/profileId.module.css";
 
 export async function getStaticPaths() {
+  const response = await fetch("http://localhost:3001/people");
+  const data = await response.json();
+
+  const paths = data.map((crewMember) => ({
+    params: {
+      id: crewMember.id.toString(),
+    },
+  }));
+
   return {
-    paths: [
-      { params: { id: "1" } },
-      { params: { id: "2" } },
-      { params: { id: "3" } },
-      { params: { id: "4" } },
-      { params: { id: "5" } },
-      { params: { id: "6" } },
-      { params: { id: "7" } },
-      { params: { id: "8" } },
-      { params: { id: "9" } },
-      { params: { id: "10" } },
-    ],
+    paths: paths,
     fallback: false,
   };
 }
 
-export const getStaticProps = async () => {
-  const response = await fetch("http://localhost:3001/people");
+export const getStaticProps = async ({ params }) => {
+  const response = await fetch(`http://localhost:3001/people/${params.id}`);
   const userData = await response.json();
 
   const res = await fetch("http://localhost:3001/tasks");
   const userDataTasks = await res.json();
 
   return {
-    props: { users: userData, tasks: userDataTasks },
+    props: { user: userData, tasks: userDataTasks },
   };
 };
 
-function ProfileUser({ users, tasks }) {
+function ProfileUser({ user, tasks }) {
   const router = useRouter();
 
-  const userInfo = users.filter((user) => user.id === Number(router.query.id));
   const userTasks = tasks.filter(
     (task) => task.personId === Number(router.query.id)
   );
@@ -169,13 +166,13 @@ function ProfileUser({ users, tasks }) {
       </div>
       <div className={styles.upperContainer}>
         <ItemDetail
-          id={userInfo[0].id}
-          image={userInfo[0].picture}
-          fullName={userInfo[0].fullName}
-          age={userInfo[0].age}
-          occupation={userInfo[0].occupation}
-          nickname={userInfo[0].nickname}
-          gender={userInfo[0].gender}
+          id={user.id}
+          image={user.picture}
+          fullName={user.fullName}
+          age={user.age}
+          occupation={user.occupation}
+          nickname={user.nickname}
+          gender={user.gender}
         />
       </div>
       <div className={styles.lowerContainer}>

@@ -74,13 +74,13 @@
       "picture": "https://randomuser.me/api/portraits/lego/8.jpg"
     },
     {
-      "id": 9,
-      "fullName": "William Rodriguez",
-      "age": 33,
+      "fullName": "Lucero Sanchez",
       "occupation": "Accountant",
-      "nickname": "Will",
+      "age": 33,
+      "nickname": "Lucerito",
       "gender": "Male",
-      "picture": "https://randomuser.me/api/portraits/lego/9.jpg"
+      "picture": "https://randomuser.me/api/portraits/lego/9.jpg",
+      "id": 9
     },
     {
       "id": 10,
@@ -90,15 +90,6 @@
       "nickname": "Ash",
       "gender": "Female",
       "picture": "https://randomuser.me/api/portraits/lego/1.jpg"
-    },
-    {
-      "fullName": "Mario Moreno",
-      "age": "111",
-      "occupation": "Comedian",
-      "nickname": "Cantinflas",
-      "gender": "male",
-      "picture": "https://randomuser.me/api/portraits/lego/6.jpg",
-      "id": 11
     }
   ],
   "tasks": [
@@ -269,7 +260,7 @@
       "description": "This is the twentieth task on the list.",
       "completed": false,
       "startDate": "2022-12-04",
-      "endDate": null,
+      "endDate": "2023-07-08",
       "personId": 10
     },
     {
