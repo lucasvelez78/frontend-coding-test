@@ -55,7 +55,7 @@
   padding: 5px;
   border-radius: 5px;
   border-style: none;
-  background-color: #5463ff;
+  background-color: #ff1818;
   margin: 20px;
   font-size: 16px;
   letter-spacing: 1px;
@@ -86,7 +86,7 @@
   font-size: 16px;
   color: #ececec;
   text-decoration: none;
-  background-color: #ff1818;
+  background-color: #5463ff;
   padding: 7.5px 40px;
   border-radius: 5px;
   margin-bottom: 30px;
@@ -94,4 +94,9 @@
 
 .cancelBtn a:hover {
   background-color: black;
+}
+
+#taskResponsible {
+  width: 412px;
+  height: 35px;
 }

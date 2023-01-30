@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from "../styles/editTask.module.css";
 
-function TaskForm({ task }) {
+function TaskForm({ task, users }) {
   const router = useRouter();
   const [activeTask, setActiveTask] = useState({
     id: task.id,
@@ -26,6 +26,14 @@ function TaskForm({ task }) {
     const input = evt.target;
     const copyActiveTask = { ...activeTask };
     copyActiveTask[input.name] = input.checked;
+    setActiveTask(copyActiveTask);
+  }
+
+  function passPersonId(evt) {
+    const input = evt.target;
+    const value = Number(input.value);
+    const copyActiveTask = { ...activeTask };
+    copyActiveTask[input.name] = value;
     setActiveTask(copyActiveTask);
   }
 
@@ -111,15 +119,17 @@ function TaskForm({ task }) {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="personId">
-            personId - Which crew member will perform the task.
-            <input
-              required
-              defaultValue={task.personId}
+            Person responsible for the task.
+            <select
               className={styles.formInput}
-              type="number"
+              id={styles.taskResponsible}
               name="personId"
-              onChange={handleChange}
-            ></input>
+              onChange={passPersonId}
+            >
+              {users.map((user) => (
+                <option value={user.id}>{user.fullName}</option>
+              ))}
+            </select>
           </label>
         </div>
         <div className={styles.btnsForm}>

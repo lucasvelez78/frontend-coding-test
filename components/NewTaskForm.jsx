@@ -5,7 +5,15 @@ import styles from "../styles/editTask.module.css";
 function NewTaskForm({ tasks, users }) {
   const idNmuber = tasks.length + 1;
 
-  const [newTask, setNewTask] = useState({});
+  const [newTask, setNewTask] = useState({
+    id: null,
+    title: "",
+    description: "",
+    completed: false,
+    startDate: "",
+    endDate: "",
+    personId: null,
+  });
 
   function handleChange(evt) {
     const input = evt.target;
@@ -18,6 +26,14 @@ function NewTaskForm({ tasks, users }) {
     const input = evt.target;
     const copyNewTask = { ...newTask };
     copyNewTask[input.name] = input.checked;
+    setNewTask(copyNewTask);
+  }
+
+  function passPersonId(evt) {
+    const input = evt.target;
+    const value = Number(input.value);
+    const copyNewTask = { ...newTask };
+    copyNewTask[input.name] = value;
     setNewTask(copyNewTask);
   }
 
@@ -108,23 +124,24 @@ function NewTaskForm({ tasks, users }) {
               value={newTask.gender}
               className={styles.formInput}
               type="text"
-              name="gender"
+              name="endDate"
               onChange={handleChange}
             ></input>
           </label>
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="personId">
-            PersonId: id of the member that will perform the task. A number
-            between {`1 and ${users.length}`}
-            <input
-              required
-              value={newTask.personId}
+            Person responsible for the task.
+            <select
               className={styles.formInput}
-              type="number"
+              id={styles.taskResponsible}
               name="personId"
-              onChange={handleChange}
-            ></input>
+              onChange={passPersonId}
+            >
+              {users.map((user) => (
+                <option value={user.id}>{user.fullName}</option>
+              ))}
+            </select>
           </label>
         </div>
         <div className={styles.btnsForm}>
