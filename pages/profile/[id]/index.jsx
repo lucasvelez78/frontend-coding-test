@@ -3,6 +3,7 @@ import Link from "next/link";
 import ItemDetail from "../../../components/ItemDetail";
 import ItemTasks from "../../../components/ItemTasks";
 import styles from "../../../styles/profileId.module.css";
+import { taskStatusHandler } from "../../../helpers/taskStatusHandler";
 
 export async function getStaticPaths() {
   const response = await fetch("http://localhost:3001/people");
@@ -39,122 +40,55 @@ function ProfileUser({ user, tasks }) {
     (task) => task.personId === Number(router.query.id)
   );
 
-  // -----------------------        status handler due to endDate - START -----------------------
+  taskStatusHandler(userTasks);
 
-  const d = new Date();
-  const currentDay = d.getDate();
-  const currentMonth = d.getMonth() + 1;
-  const currentYear = d.getFullYear();
+  function handleTaskChange(id) {
+    const changedTask = userTasks.filter((task) => task.id === id);
 
-  for (let i = 0; i < userTasks.length; i++) {
-    if (
-      userTasks[i].completed === false &&
-      userTasks[i].endDate &&
-      currentYear > Number(userTasks[i].endDate.slice(0, 4))
-    ) {
+    if (changedTask[0].completed) {
       const body = {
-        id: userTasks[i].id,
-        title: userTasks[i].title,
-        description: userTasks[i].description,
-        completed: true,
-        startDate: userTasks[i].startDate,
-        endDate: userTasks[i].endDate,
-        personId: userTasks[i].personId,
+        id: changedTask[0].id,
+        title: changedTask[0].title,
+        description: changedTask[0].description,
+        completed: !changedTask[0].completed,
+        startDate: changedTask[0].startDate,
+        endDate: changedTask[0].endDate,
+        personId: changedTask[0].personId,
       };
-      fetch("http://localhost:3001/tasks/" + userTasks[i].id, {
+
+      fetch("http://localhost:3001/tasks/" + id, {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(body),
+      })
+        .then((res) => {
+          alert(
+            "WARNING: If you are marking the status as not completed, but the endDate of this task is overdue, the status will be automatically mark as completed again."
+          );
+          window.location.reload();
+        })
+        .catch((err) => console.log(err.message));
+    } else {
+      const body = {
+        id: changedTask[0].id,
+        title: changedTask[0].title,
+        description: changedTask[0].description,
+        completed: !changedTask[0].completed,
+        startDate: changedTask[0].startDate,
+        endDate: changedTask[0].endDate,
+        personId: changedTask[0].personId,
+      };
+
+      fetch("http://localhost:3001/tasks/" + id, {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(body),
       })
         .then((res) => {
           window.location.reload();
-          console.log("Task Modified");
         })
         .catch((err) => console.log(err.message));
-    } else {
-      if (
-        userTasks[i].completed === false &&
-        userTasks[i].endDate &&
-        currentYear === Number(userTasks[i].endDate.slice(0, 4)) &&
-        currentMonth > Number(userTasks[i].endDate.slice(5, 7))
-      ) {
-        const body = {
-          id: userTasks[i].id,
-          title: userTasks[i].title,
-          description: userTasks[i].description,
-          completed: true,
-          startDate: userTasks[i].startDate,
-          endDate: userTasks[i].endDate,
-          personId: userTasks[i].personId,
-        };
-        fetch("http://localhost:3001/tasks/" + userTasks[i].id, {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(body),
-        })
-          .then((res) => {
-            window.location.reload();
-            console.log("Task Modified");
-          })
-          .catch((err) => console.log(err.message));
-      } else {
-        if (
-          userTasks[i].completed === false &&
-          userTasks[i].endDate &&
-          currentYear === Number(userTasks[i].endDate.slice(0, 4)) &&
-          currentMonth === Number(userTasks[i].endDate.slice(5, 7)) &&
-          currentDay > Number(userTasks[i].endDate.slice(8, 10))
-        ) {
-          const body = {
-            id: userTasks[i].id,
-            title: userTasks[i].title,
-            description: userTasks[i].description,
-            completed: true,
-            startDate: userTasks[i].startDate,
-            endDate: userTasks[i].endDate,
-            personId: userTasks[i].personId,
-          };
-          fetch("http://localhost:3001/tasks/" + userTasks[i].id, {
-            method: "PUT",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(body),
-          })
-            .then((res) => {
-              window.location.reload();
-              console.log("Task Modified");
-            })
-            .catch((err) => console.log(err.message));
-        }
-      }
     }
-  }
-
-  // -----------------------        status handler due to endDate - END -----------------------
-
-  function handleChange(id) {
-    const changedTask = userTasks.filter((task) => task.id === id);
-    const body = {
-      id: changedTask[0].id,
-      title: changedTask[0].title,
-      description: changedTask[0].description,
-      completed: !changedTask[0].completed,
-      startDate: changedTask[0].startDate,
-      endDate: changedTask[0].endDate,
-      personId: changedTask[0].personId,
-    };
-
-    fetch("http://localhost:3001/tasks/" + id, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(body),
-    })
-      .then((res) => {
-        alert(
-          "WARNING: If you are marking the status as not completed, but the endDate of this task is overdue, the status will be automatically mark as completed again."
-        );
-        window.location.reload();
-      })
-      .catch((err) => console.log(err.message));
   }
 
   return (
@@ -188,7 +122,7 @@ function ProfileUser({ user, tasks }) {
               btnState={
                 task.completed ? "Mark as not Completed" : "Mark as completed"
               }
-              onChange={handleChange}
+              onChange={handleTaskChange}
             />
           ))}
         </div>
