@@ -3,7 +3,7 @@ import Link from "next/link";
 import ItemDetail from "../../../components/ItemDetail";
 import ItemTasks from "../../../components/ItemTasks";
 import styles from "../../../styles/profileId.module.css";
-import { taskStatusHandler } from "../../../helpers/taskStatusHandler";
+import { markTaskStatusCompletedIfOverdue } from "../../../helpers/markTaskStatusCompletedIfOverdue";
 
 export async function getStaticPaths() {
   const response = await fetch("http://localhost:3001/people");
@@ -40,55 +40,34 @@ function ProfileUser({ user, tasks }) {
     (task) => task.personId === Number(router.query.id)
   );
 
-  taskStatusHandler(userTasks);
+  markTaskStatusCompletedIfOverdue(userTasks);
 
   function handleTaskChange(id) {
     const changedTask = userTasks.filter((task) => task.id === id);
+    const body = {
+      id: changedTask[0].id,
+      title: changedTask[0].title,
+      description: changedTask[0].description,
+      completed: !changedTask[0].completed,
+      startDate: changedTask[0].startDate,
+      endDate: changedTask[0].endDate,
+      personId: changedTask[0].personId,
+    };
 
-    if (changedTask[0].completed) {
-      const body = {
-        id: changedTask[0].id,
-        title: changedTask[0].title,
-        description: changedTask[0].description,
-        completed: !changedTask[0].completed,
-        startDate: changedTask[0].startDate,
-        endDate: changedTask[0].endDate,
-        personId: changedTask[0].personId,
-      };
-
-      fetch("http://localhost:3001/tasks/" + id, {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(body),
-      })
-        .then((res) => {
+    fetch("http://localhost:3001/tasks/" + id, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        if (changedTask[0].completed) {
           alert(
             "WARNING: If you are marking the status as not completed, but the endDate of this task is overdue, the status will be automatically mark as completed again."
           );
-          window.location.reload();
-        })
-        .catch((err) => console.log(err.message));
-    } else {
-      const body = {
-        id: changedTask[0].id,
-        title: changedTask[0].title,
-        description: changedTask[0].description,
-        completed: !changedTask[0].completed,
-        startDate: changedTask[0].startDate,
-        endDate: changedTask[0].endDate,
-        personId: changedTask[0].personId,
-      };
-
-      fetch("http://localhost:3001/tasks/" + id, {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(body),
+        }
+        window.location.reload();
       })
-        .then((res) => {
-          window.location.reload();
-        })
-        .catch((err) => console.log(err.message));
-    }
+      .catch((err) => console.log(err.message));
   }
 
   return (
