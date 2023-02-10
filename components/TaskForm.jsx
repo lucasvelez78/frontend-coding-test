@@ -127,7 +127,9 @@ function TaskForm({ task, users }) {
               onChange={passPersonId}
             >
               {users.map((user) => (
-                <option value={user.id}>{user.fullName}</option>
+                <option value={user.id} key={user.id}>
+                  {user.fullName}
+                </option>
               ))}
             </select>
           </label>

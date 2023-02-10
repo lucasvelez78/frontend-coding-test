@@ -125,7 +125,9 @@ function NewMemberForm({ users }) {
               onChange={passMemberPic}
             >
               {users.map((user) => (
-                <option value={user.picture}>{user.picture}</option>
+                <option value={user.picture} key={user.id}>
+                  {user.picture}
+                </option>
               ))}
             </select>
           </label>

@@ -1,11 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "../styles/ItemDetail.module.css";
 
 function ItemDetail(props) {
   return (
     <div className={styles.container}>
       <div className={styles.image}>
-        <img src={props.image} alt="photo" />
+        <Image src={props.image} alt="photo" width={180} height={180} />
       </div>
       <div className={styles.profile}>
         <h3>{props.fullName}</h3>
