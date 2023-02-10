@@ -21,4 +21,19 @@
 
 .container:hover {
   margin-right: 1px;
+  background-color: #ffc300;
+  color: black;
+  border-style: solid;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 925px) {
+  .content {
+    padding: auto;
+  }
 }

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Titan+One&display=swap");
+
 .taskFormContainer {
   display: flex;
   align-items: center;
@@ -8,6 +10,7 @@
 
 .taskFormContainer h1 {
   font-size: 70px;
+  font-family: "Titan One";
   color: black;
   margin: auto;
   width: 10%;
@@ -76,7 +79,7 @@
 .cancelBtn {
   list-style: none;
   border-radius: 5px;
-  margin: 30px auto 30px 110px;
+  margin: 28px auto 30px 110px;
   width: 180px;
 }
 

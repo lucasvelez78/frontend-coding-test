@@ -20,13 +20,16 @@ export const getStaticProps = async ({ params }) => {
   const response = await fetch(`http://localhost:3001/people/${params.id}`);
   const userData = await response.json();
 
+  const resp = await fetch(`http://localhost:3001/people`);
+  const members = await resp.json();
+
   return {
-    props: { user: userData },
+    props: { user: userData, users: members },
   };
 };
 
-function EditProfile({ user }) {
-  return <ProfileForm user={user} />;
+function EditProfile({ user, users }) {
+  return <ProfileForm user={user} users={users} />;
 }
 
 export default EditProfile;

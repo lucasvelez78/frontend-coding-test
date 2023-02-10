@@ -52,7 +52,7 @@ function NewTaskForm({ tasks, users }) {
   }
   return (
     <div className={styles.taskFormContainer}>
-      <h1>Add New Task</h1>
+      <h1>ADD NEW TASK</h1>
       <form className={styles.taskForm} onSubmit={onSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="id">

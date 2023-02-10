@@ -1,5 +1,5 @@
 .container {
-  background-color: #ffc300;
+  background-color: #ececec;
   padding-top: 20px;
   padding-bottom: 10px;
   min-height: 100vh;
@@ -7,13 +7,13 @@
 
 .taskTitle {
   text-align: center;
-  width: 780px;
-  margin-top: 10px;
+  width: 56%;
+  margin-top: 0px;
   margin-bottom: 10px;
-  background-color: #ececec;
+  background-color: #ffc300;
   font-size: 40px;
   padding-right: 18px;
-  color: #5463ff;
+  color: black;
 }
 
 .taskContainer {
@@ -21,42 +21,51 @@
   width: 700px;
   display: flex;
   margin: 10px auto;
-  background-color: #ececec;
+  background-color: #ffc300;
   border-radius: 10px;
 }
 
 .lowerContainer {
   padding: 10px;
   padding-bottom: 10px;
-  width: 800px;
+  width: 56%;
   margin: 10px auto;
-  background-color: #ececec;
+  background-color: #ffc300;
   border-radius: 10px;
 }
 
 .goBackBtnContainer {
   align-items: center;
-  margin: auto;
-}
-
-.goBackBtn {
-  list-style: none;
-  border-radius: 5px;
-  margin: 20px auto;
+  margin: -30px auto 10px 55%;
   width: 100px;
+  height: 80px;
+  background-color: #ececec;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+  border-radius: 10px;
 }
 
-.goBackBtn a {
-  height: 40px;
-  font-size: 20px;
+.goBackBtnContainer a {
+  display: block;
+  width: 90%;
+  height: 60px;
+  font-size: 25px;
   color: #ececec;
   text-decoration: none;
   background-color: #ff1818;
-  padding: 5px 8px;
+  text-align: center;
+  align-items: end;
+  margin: auto;
   border-radius: 5px;
-  margin-bottom: 30px;
+  padding-top: 20px;
 }
 
-.goBackBtn a:hover {
+.goBackBtnContainer a:hover {
   background-color: black;
 }
+
+/* .goBackBtnContainer:hover {
+  background-color: black;
+} */

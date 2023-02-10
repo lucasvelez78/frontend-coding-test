@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../styles/editProfile.module.css";
 
-function ProfileForm({ user }) {
+function ProfileForm({ user, users }) {
   const router = useRouter();
   const [activeUser, setActiveUser] = useState({
     fullName: user.fullName,
@@ -15,6 +15,13 @@ function ProfileForm({ user }) {
   });
 
   function handleChange(evt) {
+    const input = evt.target;
+    const copyActiveUser = { ...activeUser };
+    copyActiveUser[input.name] = input.value;
+    setActiveUser(copyActiveUser);
+  }
+
+  function passMemberPic(evt) {
     const input = evt.target;
     const copyActiveUser = { ...activeUser };
     copyActiveUser[input.name] = input.value;
@@ -36,7 +43,7 @@ function ProfileForm({ user }) {
 
   return (
     <div className={styles.profileFormContainer}>
-      <h1>Edit Profile</h1>
+      <h1>EDIT PROFILE</h1>
       <form className={styles.profileForm} onSubmit={onSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="fullName">
@@ -105,15 +112,17 @@ function ProfileForm({ user }) {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="picture">
-            Picture - write the URL -
-            <input
-              required
-              defaultValue={user.picture}
+            Picture
+            <select
               className={styles.formInput}
-              type="text"
+              id={styles.memberPic}
               name="picture"
-              onChange={handleChange}
-            ></input>
+              onChange={passMemberPic}
+            >
+              {users.map((user) => (
+                <option value={user.picture}>{user.picture}</option>
+              ))}
+            </select>
           </label>
         </div>
         <div className={styles.btnsForm}>

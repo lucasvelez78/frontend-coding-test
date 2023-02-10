@@ -14,6 +14,13 @@ function NewMemberForm({ users }) {
     setNewCrewMember(copyNewCrewMember);
   }
 
+  function passMemberPic(evt) {
+    const input = evt.target;
+    const copyNewCrewMember = { ...newCrewMember };
+    copyNewCrewMember[input.name] = input.value;
+    setNewCrewMember(copyNewCrewMember);
+  }
+
   function onSubmit(e) {
     e.preventDefault();
     fetch("http://localhost:3001/people/", {
@@ -29,7 +36,7 @@ function NewMemberForm({ users }) {
   }
   return (
     <div className={styles.profileFormContainer}>
-      <h1>Add New Member</h1>
+      <h1>ADD NEW MEMBER</h1>
       <form className={styles.profileForm} onSubmit={onSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="id">
@@ -110,26 +117,28 @@ function NewMemberForm({ users }) {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="picture">
-            Picture - write the URL -
-            <input
-              required
-              value={newCrewMember.picture}
+            Picture
+            <select
               className={styles.formInput}
-              type="text"
+              id={styles.memberPic}
               name="picture"
-              onChange={handleChange}
-            ></input>
+              onChange={passMemberPic}
+            >
+              {users.map((user) => (
+                <option value={user.picture}>{user.picture}</option>
+              ))}
+            </select>
           </label>
         </div>
-        <div className={styles.btnsForm}>
-          <button type="submit">Submit</button>
-          <div className={styles.cancelBtnContainer}>
-            <li className={styles.cancelBtn}>
-              <Link href="/">Home</Link>
-            </li>
-          </div>
-        </div>
       </form>
+      <div className={styles.btnsForm}>
+        <button type="submit">Submit</button>
+        <div className={styles.cancelBtnContainer}>
+          <li className={styles.cancelBtn}>
+            <Link href="/">Home</Link>
+          </li>
+        </div>
+      </div>
     </div>
   );
 }

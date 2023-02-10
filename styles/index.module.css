@@ -1,14 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Titan+One&display=swap");
+
 .container {
   text-align: center;
   align-items: center;
   color: black;
   padding-top: 30px;
-  background-color: #ffc300;
+  background-color: #ececec;
   padding-bottom: 50px;
 }
 
+.homeTitle {
+  width: 50%;
+  height: 100px;
+  background-color: #ff1818;
+  margin: 50px auto;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 8px;
+  border-color: #ffc300;
+  justify-content: center;
+  text-align: center;
+  padding-top: 10px;
+}
+
 .homeTitle h1 {
-  font-size: 50px;
+  font-family: "Titan One";
+  font-size: 70px;
+  color: #ececec;
+  margin: auto;
 }
 
 .list {
@@ -21,18 +40,24 @@
   width: 1200px;
 }
 
-.sort {
+.buttons {
   display: flex;
   justify-content: space-around;
   width: 1100px;
   margin: 20px auto;
 }
 
-.sort button {
+.sortBtn {
+  list-style: none;
+  margin: 0 auto auto;
+  width: 240px;
+}
+
+.buttons button {
   margin-top: 10px;
   margin-left: 10px;
-  height: 40px;
-  width: 110px;
+  height: 42px;
+  width: 180px;
   cursor: pointer;
   border-style: none;
   color: #ececec;
@@ -43,9 +68,9 @@
   font-weight: bold;
 }
 
-.sort button:hover {
-  background-color: #ffc300;
-  color: black;
+.buttons button:hover {
+  background-color: black;
+  color: #ececec;
   border-style: solid;
   border-color: black;
 }
@@ -81,9 +106,9 @@
 .addTaskBtn a {
   width: 200px;
   height: 40px;
-  color: #ececec;
+  color: black;
   text-decoration: none;
-  background-color: black;
+  background-color: #ffc300;
   padding: 7.5px 40px;
   border-radius: 5px;
   margin-bottom: 30px;
@@ -93,13 +118,60 @@
 }
 
 .addTaskBtn a:hover {
-  background-color: #ffc300;
-  color: black;
+  background-color: black;
+  color: #ececec;
   border-style: solid;
 }
 
 .addBtn a:hover {
-  background-color: #ffc300;
-  color: black;
+  background-color: black;
+  color: #ececec;
   border-style: solid;
+}
+
+@media screen and (max-width: 1200px) {
+  .homeTitle {
+    width: 450px;
+    height: 70px;
+  }
+
+  .homeTitle h1 {
+    font-size: 50px;
+  }
+
+  .list {
+    width: 900px;
+  }
+
+  .buttons {
+    width: 800px;
+    margin: 20px auto;
+  }
+}
+
+@media screen and (max-width: 925px) {
+  .list {
+    display: flex;
+    flex-direction: column;
+    width: 480px;
+    margin: auto;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    margin: 20px auto;
+  }
+
+  .sortBtn {
+    list-style: none;
+    margin: 10px auto;
+    margin-bottom: 20px;
+  }
+
+  .sortBtn button {
+    margin: auto;
+  }
 }

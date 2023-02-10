@@ -10,13 +10,13 @@
       "picture": "https://randomuser.me/api/portraits/lego/1.jpg"
     },
     {
-      "id": 2,
-      "fullName": "Jane Smith",
-      "age": 27,
+      "fullName": "Jane Smith Taylor",
       "occupation": "Doctor",
+      "age": 27,
       "nickname": "Jane",
       "gender": "Female",
-      "picture": "https://randomuser.me/api/portraits/lego/2.jpg"
+      "picture": "https://randomuser.me/api/portraits/lego/9.jpg",
+      "id": 2
     },
     {
       "fullName": "Bob Johnson",
@@ -90,6 +90,15 @@
       "nickname": "Ash",
       "gender": "Female",
       "picture": "https://randomuser.me/api/portraits/lego/1.jpg"
+    },
+    {
+      "fullName": "Mario Moreno",
+      "age": "54",
+      "occupation": "Comedian",
+      "nickname": "Cantinflas",
+      "gender": "male",
+      "picture": "https://randomuser.me/api/portraits/lego/5.jpg",
+      "id": 11
     }
   ],
   "tasks": [
@@ -289,6 +298,15 @@
       "startDate": "2023-01-30",
       "endDate": "2023-07-08",
       "personId": 8
+    },
+    {
+      "id": 23,
+      "title": "Task 23",
+      "description": "This is the twenty-third task",
+      "completed": false,
+      "startDate": "2023-02-10",
+      "endDate": "2023-04-08",
+      "personId": 11
     }
   ]
 }

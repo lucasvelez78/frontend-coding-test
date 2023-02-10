@@ -29,14 +29,16 @@ function HomePage({ users }) {
   return (
     <div className={styles.container}>
       <div className={styles.homeTitle}>
-        <h1>The Lego Crew</h1>
+        <h1>THE LEGO CREW</h1>
       </div>
-      <div className={styles.sort}>
+      <div className={styles.buttons}>
         <li className={styles.addBtn}>
           <Link href="/profile/new">Add Member</Link>
         </li>
-        <h3>Sort by age: </h3>
-        <button onClick={() => sortList()}>Sort List</button>
+        {/* <h3>Sort by age: </h3> */}
+        <li className={styles.sortBtn}>
+          <button onClick={() => sortList()}>Sort By Age</button>
+        </li>
         <li className={styles.addTaskBtn}>
           <Link href="/tasks/new">Add Task</Link>
         </li>

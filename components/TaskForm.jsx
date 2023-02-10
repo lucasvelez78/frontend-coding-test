@@ -52,7 +52,7 @@ function TaskForm({ task, users }) {
 
   return (
     <div className={styles.taskFormContainer}>
-      <h1>Edit Task</h1>
+      <h1>EDIT TASK</h1>
       <form className={styles.taskForm} onSubmit={onSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="title">
