@@ -4,32 +4,20 @@ import ItemDetail from "../../../components/ItemDetail";
 import ItemTasks from "../../../components/ItemTasks";
 import styles from "../../../styles/profileId.module.css";
 import { markTaskStatusCompletedIfOverdue } from "../../../helpers/markTaskStatusCompletedIfOverdue";
+import Member from "../../../models/crewModel";
+import Task from "../../../models/taskModel";
+import connectDB from "../../../utils/connectDB";
+import Swal from "sweetalert2";
 
-export async function getStaticPaths() {
-  const response = await fetch("http://localhost:3001/people");
-  const data = await response.json();
-
-  const paths = data.map((crewMember) => ({
-    params: {
-      id: crewMember.id.toString(),
-    },
-  }));
-
-  return {
-    paths: paths,
-    fallback: false,
-  };
-}
-
-export const getStaticProps = async ({ params }) => {
-  const response = await fetch(`http://localhost:3001/people/${params.id}`);
-  const userData = await response.json();
-
-  const res = await fetch("http://localhost:3001/tasks");
-  const userDataTasks = await res.json();
+export const getServerSideProps = async ({ params }) => {
+  await connectDB();
+  const memberResponse = await Member.findOne({ id: params.id });
+  const member = JSON.parse(JSON.stringify(memberResponse));
+  const taskResponse = await Task.find();
+  const tasks = JSON.parse(JSON.stringify(taskResponse));
 
   return {
-    props: { user: userData, tasks: userDataTasks },
+    props: { user: member, tasks: tasks },
   };
 };
 
@@ -54,18 +42,28 @@ function ProfileUser({ user, tasks }) {
       personId: changedTask[0].personId,
     };
 
-    fetch("http://localhost:3001/tasks/" + id, {
+    fetch("/api/task/" + id, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(body),
     })
       .then((res) => {
         if (changedTask[0].completed) {
-          alert(
-            "WARNING: If you are marking the status as not completed, but the endDate of this task is overdue, the status will be automatically mark as completed again."
-          );
+          Swal.fire({
+            text: "If you are marking the status as NOT COMPLETED, but the endDate of this task is overdue, the status will be automatically mark as COMPLETED again.",
+            background: "black",
+            color: "#ECECEC",
+            confirmButtonColor: "#ffc300",
+            icon: "info",
+            iconColor: "#ffc300",
+          }).then(function (isConfirm) {
+            if (isConfirm) {
+              location.reload();
+            }
+          });
+        } else {
+          window.location.reload();
         }
-        window.location.reload();
       })
       .catch((err) => console.log(err.message));
   }

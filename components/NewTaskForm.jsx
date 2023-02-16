@@ -1,18 +1,19 @@
 import { useState } from "react";
 import Link from "next/link";
 import styles from "../styles/editTask.module.css";
+import Swal from "sweetalert2";
 
 function NewTaskForm({ tasks, users }) {
   const idNmuber = tasks.length + 1;
 
   const [newTask, setNewTask] = useState({
-    id: null,
+    id: idNmuber,
     title: "",
     description: "",
     completed: false,
     startDate: "",
     endDate: "",
-    personId: null,
+    personId: "",
   });
 
   function handleChange(evt) {
@@ -37,35 +38,34 @@ function NewTaskForm({ tasks, users }) {
     setNewTask(copyNewTask);
   }
 
-  function onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    fetch("http://localhost:3001/tasks/", {
+    await fetch("/api/task", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newTask),
     })
-      .then((res) => {
-        alert("Added succesfully");
-        window.location.reload();
-      })
+      .then(
+        Swal.fire({
+          text: "Saved succesfully",
+          background: "black",
+          color: "#ECECEC",
+          confirmButtonColor: "#ffc300",
+          icon: "success",
+          iconColor: "#ffc300",
+        }).then(function (isConfirm) {
+          if (isConfirm) {
+            location.reload();
+          }
+        })
+      )
       .catch((err) => console.log(err.message));
-  }
+  };
+
   return (
     <div className={styles.taskFormContainer}>
       <h1>ADD NEW TASK</h1>
       <form className={styles.taskForm} onSubmit={onSubmit}>
-        <div className={styles.formGroup}>
-          <label htmlFor="id">
-            id
-            <input
-              required
-              defaultValue={idNmuber}
-              className={styles.formInput}
-              type="number"
-              name="id"
-            ></input>
-          </label>
-        </div>
         <div className={styles.formGroup}>
           <label htmlFor="title">
             Title
@@ -147,7 +147,9 @@ function NewTaskForm({ tasks, users }) {
           </label>
         </div>
         <div className={styles.btnsForm}>
-          <button type="submit">Submit</button>
+          <button type="submit" id={styles.submitBtn}>
+            Submit
+          </button>
           <div className={styles.cancelBtnContainer}>
             <li className={styles.cancelBtn}>
               <Link href="/">Home</Link>

@@ -2,14 +2,17 @@ import { useState } from "react";
 import Link from "next/link";
 import ItemList from "../components/ItemList";
 import styles from "../styles/index.module.css";
+import connectDB from "../utils/connectDB";
+import Member from "../models/crewModel";
 
-export const getStaticProps = async () => {
-  const response = await fetch("http://localhost:3001/people");
-  const newResponse = await response.json();
-  newResponse.sort((a, b) => a.age - b.age);
+export const getServerSideProps = async () => {
+  await connectDB();
+  const response = await Member.find();
+  const crew = JSON.parse(JSON.stringify(response));
+  crew.sort((a, b) => a.age - b.age);
 
   return {
-    props: { users: newResponse },
+    props: { users: crew },
   };
 };
 
@@ -35,7 +38,6 @@ function HomePage({ users }) {
         <li className={styles.addBtn}>
           <Link href="/profile/new">Add Member</Link>
         </li>
-        {/* <h3>Sort by age: </h3> */}
         <li className={styles.sortBtn}>
           <button onClick={() => sortList()}>Sort By Age</button>
         </li>

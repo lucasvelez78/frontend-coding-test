@@ -1,11 +1,14 @@
 import NewMemberForm from "../../components/NewMemberForm";
+import connectDB from "../../utils/connectDB";
+import Member from "../../models/crewModel";
 
-export const getStaticProps = async () => {
-  const response = await fetch("http://localhost:3001/people");
-  const userData = await response.json();
+export const getServerSideProps = async () => {
+  await connectDB();
+  const response = await Member.find();
+  const crew = JSON.parse(JSON.stringify(response));
 
   return {
-    props: { users: userData },
+    props: { users: crew },
   };
 };
 

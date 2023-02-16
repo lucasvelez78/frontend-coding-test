@@ -8,16 +8,18 @@ function ItemDetail(props) {
       <div className={styles.image}>
         <Image src={props.image} alt="photo" width={180} height={180} />
       </div>
-      <div className={styles.profile}>
-        <h3>{props.fullName}</h3>
-        <p>{props.occupation}</p>
-        <p>Age: {props.age}</p>
-        <p>Nickname: {props.nickname}</p>
-        <p>{props.gender}</p>
+      <div className={styles.profileSubcontainer}>
+        <div className={styles.profile}>
+          <h3>{props.fullName}</h3>
+          <p>{props.occupation}</p>
+          <p>Age: {props.age}</p>
+          <p>Nickname: {props.nickname}</p>
+          <p>{props.gender}</p>
+        </div>
+        <li className={styles.editBtn}>
+          <Link href={`/profile/${props.id}/edit`}>Edit Profile</Link>
+        </li>
       </div>
-      <li className={styles.editBtn}>
-        <Link href={`/profile/${props.id}/edit`}>Edit Profile</Link>
-      </li>
     </div>
   );
 }

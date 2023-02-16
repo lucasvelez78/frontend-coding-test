@@ -12,7 +12,6 @@
 
 .image img {
   margin-left: 50px;
-  width: 200px;
   border-radius: 10px;
 }
 
@@ -30,12 +29,14 @@
   margin: 8px auto;
 }
 
+.profileSubcontainer {
+  display: flex;
+  width: 80%;
+}
+
 .editBtn {
   list-style: none;
-  margin: 10px auto auto 40px;
-  position: absolute;
-  right: 30px;
-  top: 15px;
+  margin: 5px 10px auto auto;
 }
 
 .editBtn a {
@@ -53,4 +54,25 @@
   background-color: black;
   padding: 5px 8px;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 1150px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .profileSubcontainer {
+    width: 90%;
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .profileSubcontainer {
+    flex-direction: column;
+  }
+
+  .editBtn {
+    margin-top: 20px;
+  }
 }

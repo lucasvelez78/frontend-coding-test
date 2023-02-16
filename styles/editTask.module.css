@@ -5,7 +5,7 @@
   align-items: center;
   margin: auto;
   background-color: #ffc300;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .taskFormContainer h1 {
@@ -53,7 +53,7 @@
 }
 
 .btnsForm button {
-  width: 120px;
+  min-width: 120px;
   height: 40px;
   padding: 5px;
   border-radius: 5px;
@@ -71,19 +71,62 @@
   cursor: pointer;
 }
 
+#deleteBtn {
+  width: 120px;
+  height: 40px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: transparent;
+  color: black;
+  border-style: solid;
+  border-color: black;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+#deleteBtn:hover {
+  background-color: black;
+  color: #ececec;
+  border-style: none;
+  cursor: pointer;
+}
+
 .cancelBtnContainer {
   align-items: center;
+  margin: auto;
+}
+
+.goBackBtnContainer {
   margin: auto;
 }
 
 .cancelBtn {
   list-style: none;
   border-radius: 5px;
-  margin: 28px auto 30px 110px;
+  margin: 28px auto 30px 150px;
   width: 180px;
 }
 
+.goBackBtn {
+  list-style: none;
+  border-radius: 5px;
+  margin: 28px 20px 30px;
+  width: 140px;
+}
+
 .cancelBtn a {
+  width: 200px;
+  height: 40px;
+  font-size: 16px;
+  color: #ececec;
+  text-decoration: none;
+  background-color: #ff1818;
+  padding: 7.5px 40px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.goBackBtn a {
   width: 200px;
   height: 40px;
   font-size: 16px;
@@ -102,4 +145,75 @@
 #taskResponsible {
   width: 412px;
   height: 35px;
+}
+
+@media screen and (max-width: 1000px) {
+  .taskFormContainer {
+    flex-direction: column;
+  }
+
+  .taskFormContainer h1 {
+    width: 70%;
+    font-size: 60px;
+    margin-left: 20%;
+  }
+
+  .taskForm {
+    justify-content: center;
+    margin: auto;
+    width: 80%;
+    margin-left: 10%;
+    padding-left: 10%;
+  }
+
+  .cancelBtnContainer {
+    margin-left: 0%;
+  }
+
+  .goBackBtnContainer {
+    margin: auto 0;
+  }
+
+  /* .goBackBtnContainer a {
+    padding: 7.5px 30px;
+  } */
+}
+
+@media screen and (max-width: 770px) {
+  .taskForm {
+    margin-left: 5%;
+    padding-left: 10%;
+  }
+
+  .formInput {
+    width: 85%;
+  }
+
+  #taskResponsible {
+    width: 87%;
+  }
+
+  .cancelBtnContainer {
+    margin-left: -25%;
+  }
+
+  .cancelBtn {
+    width: 160px;
+  }
+
+  .goBackBtnContainer {
+    margin: auto -20px;
+  }
+
+  .btnsForm button {
+    min-width: 100px;
+  }
+
+  #deleteBtn {
+    margin-left: 20px;
+  }
+
+  .goBackBtn a {
+    width: 140px;
+  }
 }

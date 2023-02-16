@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from "../styles/editTask.module.css";
+import Swal from "sweetalert2";
 
 function TaskForm({ task, users }) {
   const router = useRouter();
@@ -14,6 +15,12 @@ function TaskForm({ task, users }) {
     endDate: task.endDate,
     personId: task.personId,
   });
+
+  const taskResponsibleObject = users.filter(
+    (user) => user.id === task.personId
+  );
+  const taskResponsible = taskResponsibleObject[0].fullName;
+  console.log(taskResponsibleObject);
 
   function handleChange(evt) {
     const input = evt.target;
@@ -39,13 +46,46 @@ function TaskForm({ task, users }) {
 
   function onSubmit(e) {
     e.preventDefault();
-    fetch("http://localhost:3001/tasks/" + router.query.id, {
+    fetch("/api/task/" + router.query.id, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(activeTask),
     })
       .then((res) => {
-        alert("saved succesfully");
+        Swal.fire({
+          text: "Saved succesfully",
+          background: "black",
+          color: "#ECECEC",
+          confirmButtonColor: "#ffc300",
+          icon: "success",
+          iconColor: "#ffc300",
+        }).then(function (isConfirm) {
+          if (isConfirm) {
+            location.reload();
+          }
+        });
+      })
+      .catch((err) => console.log(err.message));
+  }
+
+  function deleteTask() {
+    fetch("/api/task/" + router.query.id, {
+      method: "DELETE",
+      headers: { "content-type": "application/json" },
+    })
+      .then((res) => {
+        Swal.fire({
+          text: "Deleted succesfully",
+          background: "black",
+          color: "#ECECEC",
+          confirmButtonColor: "#ffc300",
+          icon: "success",
+          iconColor: "#ffc300",
+        }).then(function (isConfirm) {
+          if (isConfirm) {
+            router.push("/profile/" + router.query.id);
+          }
+        });
       })
       .catch((err) => console.log(err.message));
   }
@@ -119,7 +159,7 @@ function TaskForm({ task, users }) {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="personId">
-            Person responsible for the task.
+            {`Responsible for this task: ${taskResponsible}`}
             <select
               className={styles.formInput}
               id={styles.taskResponsible}
@@ -136,11 +176,14 @@ function TaskForm({ task, users }) {
         </div>
         <div className={styles.btnsForm}>
           <button type="submit">Submit</button>
-          <div className={styles.cancelBtnContainer}>
-            <li className={styles.cancelBtn}>
+          <div className={`${styles.goBackBtnContainer}`}>
+            <li className={`${styles.goBackBtn}`}>
               <Link href={`/profile/${task.personId}`}>Go Back</Link>
             </li>
           </div>
+          <button type="button" onClick={deleteTask} id={styles.deleteBtn}>
+            Delete
+          </button>
         </div>
       </form>
     </div>

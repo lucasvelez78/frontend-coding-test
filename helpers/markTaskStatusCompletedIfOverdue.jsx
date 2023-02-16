@@ -17,7 +17,7 @@ export const markTaskStatusCompletedIfOverdue = (memberTasks) => {
       endDate: memberTasks[i].endDate,
       personId: memberTasks[i].personId,
     };
-    fetch("http://localhost:3001/tasks/" + memberTasks[i].id, {
+    fetch("/api/task/" + memberTasks[i].id, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(body),

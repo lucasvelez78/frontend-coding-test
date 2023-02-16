@@ -1,30 +1,17 @@
 import ProfileForm from "../../../components/ProfileForm";
+import connectDB from "../../../utils/connectDB";
+import Member from "../../../models/crewModel";
 
-export async function getStaticPaths() {
-  const response = await fetch("http://localhost:3001/people");
-  const data = await response.json();
+export const getServerSideProps = async ({ params }) => {
+  await connectDB();
+  const membersResponse = await Member.find();
+  const members = JSON.parse(JSON.stringify(membersResponse));
 
-  const paths = data.map((crewMember) => ({
-    params: {
-      id: crewMember.id.toString(),
-    },
-  }));
-
-  return {
-    paths: paths,
-    fallback: false,
-  };
-}
-
-export const getStaticProps = async ({ params }) => {
-  const response = await fetch(`http://localhost:3001/people/${params.id}`);
-  const userData = await response.json();
-
-  const resp = await fetch(`http://localhost:3001/people`);
-  const members = await resp.json();
+  const memberResponse = await Member.findOne({ id: params.id });
+  const member = JSON.parse(JSON.stringify(memberResponse));
 
   return {
-    props: { user: userData, users: members },
+    props: { users: members, user: member },
   };
 };
 
