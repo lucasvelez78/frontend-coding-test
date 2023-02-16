@@ -4,7 +4,8 @@ import styles from "../styles/editProfile.module.css";
 import Swal from "sweetalert2";
 
 function NewMemberForm({ users }) {
-  const idNmuber = users.length + 1;
+  const idNmuber = users[users.length - 1].id + 1;
+
   const [newCrewMember, setNewCrewMember] = useState({
     id: idNmuber,
     fullName: "",

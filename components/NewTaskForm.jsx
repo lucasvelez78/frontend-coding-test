@@ -4,7 +4,7 @@ import styles from "../styles/editTask.module.css";
 import Swal from "sweetalert2";
 
 function NewTaskForm({ tasks, users }) {
-  const idNmuber = tasks.length + 1;
+  const idNmuber = tasks[tasks.length - 1].id + 1;
 
   const [newTask, setNewTask] = useState({
     id: idNmuber,
