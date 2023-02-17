@@ -83,7 +83,7 @@ function TaskForm({ task, users }) {
           iconColor: "#ffc300",
         }).then(function (isConfirm) {
           if (isConfirm) {
-            router.push("/profile/" + router.query.id);
+            router.push("/");
           }
         });
       })

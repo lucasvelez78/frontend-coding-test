@@ -4,10 +4,18 @@ import styles from "../styles/editTask.module.css";
 import Swal from "sweetalert2";
 
 function NewTaskForm({ tasks, users }) {
-  const idNmuber = tasks[tasks.length - 1].id + 1;
+  let idNumber;
+
+  if (tasks.length < 1) {
+    idNumber = 1;
+  } else {
+    idNumber = tasks[tasks.length - 1].id + 1;
+  }
+
+  console.log(sample);
 
   const [newTask, setNewTask] = useState({
-    id: idNmuber,
+    id: idNumber,
     title: "",
     description: "",
     completed: false,
