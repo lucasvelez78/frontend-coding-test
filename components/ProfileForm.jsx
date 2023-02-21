@@ -53,7 +53,6 @@ function ProfileForm({ user, users }) {
     fetch("/api/crew/" + router.query.id, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
-      //body: JSON.stringify(activeUser),
     })
       .then((res) => {
         Swal.fire({

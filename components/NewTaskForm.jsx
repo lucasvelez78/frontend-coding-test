@@ -12,8 +12,6 @@ function NewTaskForm({ tasks, users }) {
     idNumber = tasks[tasks.length - 1].id + 1;
   }
 
-  console.log(sample);
-
   const [newTask, setNewTask] = useState({
     id: idNumber,
     title: "",
